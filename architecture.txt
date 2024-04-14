@@ -1,0 +1,237 @@
+here is how things will work:
+
+the database will be updated with the default entities by the dml, (7 trainers(1 for each of the specialisations), 1 Admin, 0 members) and the rest of the rooms and stuff
+
+as soon as the program is ran, the user will be then prompted to Immediately to register the administratvie staf.
+
+administrative staff will be so that there is only 1 admin user in the entire program that will represent the entire staff. no more admins profiles can be created.
+
+When the user registers a member for the first time, automatically the program assume that the member payed 50 dollars and will be marked as unprocessed in the table. 
+all thats left is for the admin to process the payment in the database and mark it from unprocessed to processed.
+
+
+we will also apply the following onto the simulation as limitations/assumptions:
+all group activities will last 1h, 1h 30mins, or 2hs depending what the admin inputs
+all 1 on 1s will last 30mins or 1h depending on what the member schedules.
+all equipment maintenance will last 2hs and will be booked by the admin whenever they wish
+there will be only 4 specialised rooms that can be booked which correspond to the type of fitness classes.
+all rooms have a capacity of 5 and thus all classes will have a capacity of 5.
+
+there will be only these types of group fitness classes:
+swimming, cardio, yoga, strength.
+
+trainers will have one of the following 7 specializations:
+'Weight Loss', 'Lifting', 'Cardio', 'Yoga', 'Swimming', 'Rehab', 'Health'
+
+only swimming trainers can be booked for swimming classes
+only cardio trainers can only be booked for cardio classes
+only yoga trainers can only be booked for yoga classes
+only lifting trainers can only be booked for classes strength classes
+
+the fitness goals and health metrics will stay the same with only some additions
+fitness goals: 'Muscle Gain', 'Endurance', 'Flexibility', 'Strength', 'Overall Health'
+health metrics: 'Weight', 'Height', 'BMI', 'Allergies', 'BFP', 'Conditions'
+when the program runs, the database's tables will be created and be filled with the default 7 trainers(1 for each specialisation) and their default availability.
+this 'defualt' will be a DML file we will appload along with the DDL file into the databsse when its created.
+
+ 
+we have multiple schedules/appointments.
+
+1. group fitness classes
+for any group activities:
+
+
+1. the user must login as an admin and first book a room and schedule the class with one of the trainers that can lead the class.
+2. the scheduling must abide by the trainers schedule and it can't conflict with thier other scheduled appointments.
+3. the scheduling cant conflict with an equipment maintenance check or any other classes.
+4. classes are either 'scheduled, ongoing, completed, or cancel
+
+
+2. 1 on 1s
+1. private 1 on 1 appointments between trainers and members dont require rooms to be booked or classes to be scheduled. 
+2. members can schedule these so long as the appointment doesnt conflict with:
+3. the trainers availability
+4. another scheduled appointment with another member(or maybe even the same one)
+5. a maintenance check
+
+
+3. equipment maintenance
+
+maintenance checks will be scheduled by the admin staff whenever the user wants
+
+no appointments can be booked besides the following private 1 on 1 appointments:
+1. Weight Loss
+2. Strength
+3. Cardio
+4. Rehab
+5. Health
+
+all other appointments, including the remaining private one on ones and all group fitness class can not be booked during an equipment maintenance.
+specifically: 'Yoga', 'Swimming' private classes and all group classes.
+likewise equipment maintenance appointments can't be booked during those classes/sessions.
+
+it is imperitive we need to ensure
+1. multiple different members are not booking the same trainer at the same time.
+2. members arent booking during group fitness class times and vice versa.
+3. members are not scheduling during equipment maintenance checks
+4. admins are not scheduling booking rooms/scheduling classes during maintenance checks or 1 on 1 sessions with the specialised trainer for that fitness class.
+
+
+this project should be kept as simple as it needs to be.
+
+lets begin with this project, starting with what tables we will need to create for optimal coding, key relations, etc.
+
+ 
+heres breifly how itll work: 
+```
+Welcome to the Health and Fitness Club Management Simulation!
+Please wait while the simulation boots up!
+
+0%
+25%
+75%
+100%
+```
+
+the program will then display the options
+
+```
+What would you like to continue as:
+
+
+1. Admin
+2. Trainer
+3. Member
+4. Quit
+```
+
+if user enters 1 for Admin:
+
+if its the first time:
+
+```
+Detecting Admin has not been setup yet!
+Please enter a Password for admin (Note: remember this password as it will be required for future logins): xxxx
+
+Logging in Admin 'xxxx'
+Successfuly setup, Welcome Admin!
+```
+
+otherwise
+```
+Please enter Password: xxxx
+
+Logging in Admin 'xxxx'
+Successful Login, Welcome Admin!
+```
+
+if user enters 2 for Trainer:
+
+```
+Would you like to:
+
+1. Login
+2. Register New Trainer
+```
+
+if user clicks option 1 Login:
+
+```
+List of Trainers:
+
+1. Sydney (Weight Loss) 
+2. Alex (Lifting)
+3. Elsa (Cardio)
+4. Vivian (Yoga)
+5. Max (Swimming)
+6. Kane (Rehab)
+7. Jerome (Health)
+
+
+Who would you like to login as (number): xxxx
+Please enter Password: xxxx
+
+Logging in Trainer 'xxxx'
+Successful Login, Welcome Trainer 'xxxx'!
+```
+
+please note that in the beginning, all 7 trainers will have no password, allowing the user to set a password as soon as the choose to login as one.
+
+Something like:
+
+``` 
+Detecting First Login for Trainer xxxx.
+Please set a password for future logins: xxxx
+
+Password Set, Logging in Trainer 'xxxx'
+Successful Login, Welcome xxxx!
+```
+
+if user clicks option 2 Register:
+
+``` 
+Please enter new Trainer's First Name: xxxx
+Please enter new Trainer's Last Name: yyyy
+Please enter new Trainer's Password: xxxx
+
+List of Specialisations:
+1.
+...
+7.
+
+Please enter new Trainers Specialisation (number): xxxx
+
+Successfuly registered new Trainer 'xxxx'
+Logging in Trainer 'xxxx'
+Successful Login, Welcome xxxx!
+```
+
+if user enters 3 for Member:
+
+if its not the first time:
+```
+Would you like to:
+
+1. Login
+2. Register New Member
+```
+
+if user enters option 1 Login:
+
+```
+List of Members:
+
+1. xxxx
+2. yyyy
+3. zzzz
+
+
+Please enter First Name/Email: xxxx
+Please enter Password: xxxx
+
+Logging in Member 'xxxx'
+Successful Login, Welcome Member 'xxxx'!
+```
+
+if its the first time:
+
+```
+Detecting that there are currently no members registered.
+Automatically begining registration process!
+
+Please enter First Name: xxxx
+Please enter Last Name: yyyy
+Please enter Password: xxxx
+
+Successfuly registered new Member 'xxxx'
+
+```
+
+if the user enters option 2 Register:
+
+Please enter new Member's First Name: xxxx
+Please enter new Member's Last Name: yyyy
+Please enter new Member's Password: xxxx
+
+Successfuly registered new Member 'xxxx'
+```
